@@ -1,0 +1,23 @@
+name: Build Kivy Android APK
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: kivy/buildozer:latest
+
+    # ✅ متغير البيئة هذا يتجاوز سؤال "Are you sure you want to continue [y/n]?"
+    env:
+      BUILDOZER_ALLOW_ROOT: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build APK
+        run: buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: kivy-flash-apk
+          path: bin/*.apk
