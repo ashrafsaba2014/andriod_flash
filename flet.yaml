@@ -1,9 +1,8 @@
 app:
-  name: "Ashraf Test App"
+  name: "Ashraf Test"
   title: "Ashraf App"
-  description: "تطبيق اختباري ناجح"
   version: "1.0.0"
-  package: "com.ashraf.testapp"
+  package: "com.ashraf.test"
 
 build:
   android:
@@ -12,4 +11,4 @@ build:
     version_code: 1
     permissions:
       - INTERNET
-    icon: "assets/icon.png"
+    # تم حذف سطر icon مؤقتًا لأن ملفًا غير صالح يسبب شاشة بيضاء صامتة
