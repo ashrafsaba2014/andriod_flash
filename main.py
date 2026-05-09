@@ -4,40 +4,32 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from plyer import flashlight
 
-class FlashApp(BoxLayout):
+class FlashUI(BoxLayout):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, orientation='vertical', spacing=20, padding=40)
+        super().__init__(**kwargs, orientation='vertical', spacing=30, padding=50)
+        self.lbl = Label(text="جاهز", font_size='28sp', color=(0,0,1,1))
+        self.add_widget(self.lbl)
+        
+        btn = Button(text="تشغيل الفلاش 🔦", size_hint_y=0.3)
+        btn.bind(on_press=self.toggle)
+        self.add_widget(btn)
 
-        self.status = Label(text="اضغط للتشغيل", font_size='24sp', color=(0,0,1,1))
-        self.add_widget(self.status)
-
-        btn_on = Button(text="تشغيل 🔦", size_hint_y=0.3, background_color=(0, 0.8, 0, 1))
-        btn_on.bind(on_press=self.turn_on)
-        self.add_widget(btn_on)
-
-        btn_off = Button(text="إيقاف ⭕", size_hint_y=0.3, background_color=(0.8, 0, 0, 1))
-        btn_off.bind(on_press=self.turn_off)
-        self.add_widget(btn_off)
-
-    def turn_on(self, instance):
+    def toggle(self, instance):
         try:
-            flashlight.on()
-            self.status.text = "يعمل ✅"
-            self.status.color = (0, 0.8, 0, 1)
+            if "يعمل" not in self.lbl.text:
+                flashlight.on()
+                self.lbl.text = "يعمل ✅"
+                self.lbl.color = (0, 0.8, 0, 1)
+            else:
+                flashlight.off()
+                self.lbl.text = "متوقف ⭕"
+                self.lbl.color = (0.8, 0, 0, 1)
         except Exception as e:
-            self.status.text = f"خطأ: {str(e)}"
-
-    def turn_off(self, instance):
-        try:
-            flashlight.off()
-            self.status.text = "متوقف ⭕"
-            self.status.color = (0.8, 0, 0, 1)
-        except Exception as e:
-            self.status.text = f"خطأ: {str(e)}"
+            self.lbl.text = f"خطأ: {e}"
 
 class MainApp(App):
     def build(self):
-        return FlashApp()
+        return FlashUI()
 
 if __name__ == '__main__':
     MainApp().run()
