@@ -1,0 +1,15 @@
+app:
+  name: "Ashraf Test App"
+  title: "Ashraf App"
+  description: "تطبيق اختباري ناجح"
+  version: "1.0.0"
+  package: "com.ashraf.testapp"
+
+build:
+  android:
+    min_sdk_version: 21
+    target_sdk_version: 34
+    version_code: 1
+    permissions:
+      - INTERNET
+    icon: "assets/icon.png"
