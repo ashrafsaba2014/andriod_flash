@@ -12,7 +12,7 @@ android.permissions = CAMERA
 android.api = 34
 android.minapi = 21
 android.sdk = 34
-android.ndk = 27c
+android.ndk = 25c
 android.archs = arm64-v8a
 android.accept_sdk_license = True
 
