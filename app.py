@@ -1,34 +1,25 @@
 import flet as ft
 
 def main(page: ft.Page):
-    try:
-        # إعدادات آمنة لأندرويد
-        page.title = "Test App"
-        page.padding = 0
-        page.bgcolor = ft.Colors.WHITE
+    page.title = "Test App"
+    page.bgcolor = ft.Colors.WHITE
+    page.padding = 20
 
-        def on_tap(e):
-            page.add(ft.Text("✅ التفاعل يعمل!", size=18, color=ft.Colors.GREEN))
-            page.update()
+    status = ft.Text("جاهز للتشغيل", size=20, color=ft.Colors.BLUE)
 
-        # حاوية تضمن ظهور المحتوى في أي حجم شاشة
-        page.add(
-            ft.Container(
-                content=ft.Column([
-                    ft.Text("إذا ظهرت هذه الكلمات، فالواجهة تعمل 100%", size=16, color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD),
-                    ft.Container(height=20),
-                    ft.ElevatedButton("اضغط هنا", on_click=on_tap, width=180, height=45)
-                ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
-                bgcolor=ft.Colors.WHITE,
-                expand=True,
-                alignment=ft.alignment.center
-            )
-        )
-        page.update()  # إجباري على الأندرويد
-    except Exception as e:
-        # يعرض الخطأ على الشاشة مباشرة إذا فشل البدء
-        page.add(ft.Text(f"❌ خطأ أثناء التشغيل:\n{str(e)}", color=ft.Colors.RED, size=14))
+    def on_click(e):
+        status.value = "تم الضغط بنجاح! 🎉"
+        status.color = ft.Colors.GREEN
         page.update()
+
+    page.add(
+        ft.AppBar(title=ft.Text("اختبار"), bgcolor=ft.Colors.RED, color=ft.Colors.WHITE),
+        ft.Column([
+            status,
+            ft.ElevatedButton("اضغط هنا", on_click=on_click, width=200, height=50)
+        ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER, expand=True)
+    )
+    page.update()  # ⚠️ إلزامي لظهور الواجهة على الأندرويد
 
 if __name__ == "__main__":
     ft.app(target=main)
