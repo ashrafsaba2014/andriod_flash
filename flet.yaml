@@ -1,0 +1,11 @@
+app:
+  name: "Test App"
+  title: "Test"
+  version: "1.0.0"
+  package: "com.test.app"
+
+build:
+  android:
+    min_sdk_version: 21
+    target_sdk_version: 34
+    version_code: 1
